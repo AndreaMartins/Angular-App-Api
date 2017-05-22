@@ -12,7 +12,7 @@ const bcryptSalt     = 10;
 
 
 router.post("/login", function(req, res) {
-  
+
   if(req.body.username && req.body.password){
     var username = req.body.username;
     var password = req.body.password;
@@ -24,7 +24,7 @@ router.post("/login", function(req, res) {
   }
 
   User.findOne({ "username": username }, (err, user)=> {
-  	
+
   	if( ! user ){
 	    res.status(401).json({message:"no such user found"});
 	  } else {
@@ -33,11 +33,13 @@ router.post("/login", function(req, res) {
         if (!isMatch) {
           res.status(401).json({message:"passwords did not match"});
         } else {
-          var payload = {id: user._id};
+        	console.log('user', user);
+          var payload = {id: user._id, user: user.username};
           var token = jwt.sign(payload, jwtOptions.secretOrKey);
-          res.json({message: "ok", token: token});    
+          console.log(token)
+          res.json({message: "ok", token: token, user: user});
         }
-      });  
+      });
     }
   })
 });
@@ -69,10 +71,10 @@ router.post("/signup", (req, res, next) => {
       if (err) {
         res.status(400).json({ message: err });
       } else {
-        var payload = {id: user._id};
-        console.log('user', user);
+        var payload = {id: user._id, user: user.username};
+
         var token = jwt.sign(payload, jwtOptions.secretOrKey);
-        res.status(200).json({message: "ok", token: token});    
+        res.status(200).json({message: "ok", token: token, user: user});
       	// res.status(200).json(user);
       }
     });

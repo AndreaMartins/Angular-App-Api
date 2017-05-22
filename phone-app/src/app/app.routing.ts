@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { PhoneDetailsComponent } from './phone-details/phone-details.component';
 import { PhoneListComponent } from './phone-list/phone-list.component';
 import { AddPhoneComponent } from './add-phone/add-phone.component';
+import { AddListComponent } from './add-list/add-list.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { HomeComponent } from './home/home.component';
@@ -13,6 +14,7 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
     { path: 'add', component: AddPhoneComponent, canActivate: [SessionService] },
+    { path: 'addlist', component: AddListComponent, canActivate: [SessionService] },
     { path: 'phone', component: PhoneListComponent, canActivate: [SessionService] },
     { path: 'phone/:id', component: PhoneDetailsComponent, canActivate: [SessionService] },
     { path: '**', redirectTo: '' }

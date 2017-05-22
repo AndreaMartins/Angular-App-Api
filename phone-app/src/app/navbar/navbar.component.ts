@@ -9,24 +9,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  isAuth: boolean;
-
+  
   constructor(
   	private session: SessionService,
-  	private router:  Router
-  ) {
-    this.session.isAuth
-        .subscribe((isAuth: boolean) => {
-        // user will be false if logged out
-        // or user object if logged in.
-          this.isAuth = isAuth;
-        });
-    if (this.session.token) {
-      this.isAuth = true;
-    } else {
-      this.isAuth = false;
-    }
-  }
+  	private router:  Router,
+  ) {}
 
   ngOnInit() {
   }
